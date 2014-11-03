@@ -32,7 +32,27 @@ class SignupsController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+        $validation = Validator::make($input, Account::$rules);
+
+        if ($validation->passes())
+        {
+            $account = new Account;
+			$account->full_name = Input::get('full_name');
+			$account->company = Input::get('company');
+			$account->domain = Input::get('domain');
+			$account->email = Input::get('email');
+		    $account->active = 1;
+		    $account->password = Hash::make(Input::get('password'));
+		    $account->save();
+            return Redirect::route('sign-up');
+        }
+
+        return Redirect::route('sign-up')
+            ->withInput()
+            ->withErrors($validation)
+            ->with('message', 'There were validation errors.');
+
 	}
 
 	/**
