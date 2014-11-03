@@ -30,7 +30,9 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Maintenance <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="themes">
 								<li><a href="/items">Items</a></li>
-								<li><a href="/branch">Branches</a></li>
+								<li><a href="/items">Item Department</a></li>
+								<li><a href="/items">Item Category</a></li>
+								<li><a href="/branches">Branches</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">

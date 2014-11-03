@@ -23,4 +23,8 @@ Route::resource('items', 'ItemsController');
 
 Route::resource('sales', 'SalesController');
 
-Route::resource('branch', 'BranchesController');
+Route::resource('branches', 'BranchesController');
+
+Route::resource('department', 'DepartmentsController');
+
+Route::resource('category', 'CategoriesController');
