@@ -13,8 +13,4 @@ class Account extends \Eloquent {
     	'email' => 'required|email'
   	);
 
-  	public function users()
-    {
-        return $this->hasMany('User');
-    }
 }

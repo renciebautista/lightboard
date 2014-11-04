@@ -45,7 +45,7 @@ class SessionsController extends \BaseController {
 		}	
 		 
 		if($attempt) {
-			return Redirect::intended();
+			return Redirect::intended('dashboard');
 			// return Redirect::intended('/')
 			// ->with(array('flash_message' => 'Successfully logged in',
 			// 'flash_type' => 'success') );

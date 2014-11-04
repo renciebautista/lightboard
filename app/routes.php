@@ -16,14 +16,14 @@ Route::get('/themes', function()
 	return View::make('hello');
 });
 
-Route::get('log-out', array('as' => 'log-out',  'uses' => 'SessionsController@destroy'));
-Route::get('log-in', array('as' => 'log-in',  'uses' => 'SessionsController@create'));
-Route::post('log-in', array('as' => 'log-in',  'uses' => 'SessionsController@store'));
+Route::get('logout', array('as' => 'log-out',  'uses' => 'SessionsController@destroy'));
+Route::get('login', array('as' => 'log-in',  'uses' => 'SessionsController@create'));
+Route::post('login', array('as' => 'log-in',  'uses' => 'SessionsController@store'));
 
 Route::get('/', array('as' => 'sign-up.index', 'uses' => 'SignupsController@index'));
 
-Route::get('sign-up', array('as' => 'sign-up', 'uses' => 'SignupsController@create'));
-Route::post('sign-up',array('as' => 'sign-up', 'uses' => 'SignupsController@store'));
+Route::get('signup', array('as' => 'sign-up', 'uses' => 'SignupsController@create'));
+Route::post('signup',array('as' => 'sign-up', 'uses' => 'SignupsController@store'));
 
 Route::group(array('before' => 'auth'), function()
 {
@@ -36,5 +36,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('department', 'DepartmentsController');
 
 	Route::resource('category', 'CategoriesController');
+
+	Route::resource('dashboard', 'DashboardController');
 });
 

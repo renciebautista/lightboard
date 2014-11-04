@@ -29,10 +29,10 @@
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Maintenance <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="themes">
-								<li><a href="/items">Items</a></li>
-								<li><a href="/items">Item Department</a></li>
-								<li><a href="/items">Item Category</a></li>
-								<li><a href="/branches">Branches</a></li>
+								<li>{{ HTML::linkRoute('department.index', 'Item Department') }}</li>
+								<li>{{ HTML::linkRoute('category.index', 'Item Category') }}</li>
+								<li>{{ HTML::linkRoute('items.index', 'Items') }}</li>
+								<li>{{ HTML::linkRoute('branches.index', 'Branches') }}</li>
 							</ul>
 						</li>
 						<li class="dropdown">
