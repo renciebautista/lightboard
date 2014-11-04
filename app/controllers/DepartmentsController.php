@@ -22,7 +22,7 @@ class DepartmentsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('departments.create');
 	}
 
 	/**
@@ -32,8 +32,21 @@ class DepartmentsController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
-	{
-		//
+	{	
+		Input::merge(array_map('trim', Input::all()));
+		$input = Input::all();
+		$validation = Validator::make($input, Department::$rules);
+
+		if($validation->passes())
+		{
+			$department = Department::create(array('department_desc' => Input::get('department_desc')));
+			return Redirect::route('department.index');
+		}
+
+		return Redirect::route('department.create')
+			->withInput()
+			->withErrors($validation)
+			->with('message', 'There were validation errors.');
 	}
 
 	/**

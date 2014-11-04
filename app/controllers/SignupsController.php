@@ -33,19 +33,18 @@ class SignupsController extends BaseController {
 	public function store()
 	{
 		$input = Input::all();
-        $validation = Validator::make($input, Account::$rules);
+		$validation = Validator::make($input, Account::$rules);
 
-        if ($validation->passes())
-        {
-        	DB::transaction(function(){
-        		$account = new Account;
+		if ($validation->passes())
+		{
+			DB::transaction(function(){
+				$account = new Account();
 				$account->full_name = Input::get('full_name');
 				$account->company = Input::get('company');
 				$account->domain = Input::get('domain');
-			    $account->save();
+				$account->save();
 
-			    $user = new User;
-			    $user->account_id = $account->id;
+				$user = new User();
 				$user->full_name = Input::get('full_name');
 				$user->username = Input::get('email');
 				$user->password = Hash::make(Input::get('password'));
@@ -53,18 +52,17 @@ class SignupsController extends BaseController {
 				$user->account_admin = 1;
 				$user->active = 1;
 				$user->email = Input::get('email');
-				$user->save();
-        	});
-           
+
+				$account->users()->save($user);
+			});
 		   
+			return Redirect::route('items.index');
+		}
 
-            return Redirect::route('items.index');
-        }
-
-        return Redirect::route('sign-up')
-            ->withInput()
-            ->withErrors($validation)
-            ->with('message', 'There were validation errors.');
+		return Redirect::route('sign-up')
+			->withInput()
+			->withErrors($validation)
+			->with('message', 'There were validation errors.');
 
 	}
 

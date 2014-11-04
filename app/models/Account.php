@@ -6,11 +6,15 @@ class Account extends \Eloquent {
 
 	protected $hidden = array('password');
 
-  	public static $rules = array(
-    	'full_name' => 'required',
-    	'company' => 'required',
-    	'domain' => 'required|unique:accounts',
-    	'email' => 'required|email'
-  	);
+	public static $rules = array(
+		'full_name' => 'required',
+		'company' => 'required',
+		'domain' => 'required|unique:accounts',
+		'email' => 'required|email'
+	);
 
+	public function users()
+	{
+		return $this->hasMany('User');
+	}
 }

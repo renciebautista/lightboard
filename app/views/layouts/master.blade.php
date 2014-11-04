@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{{ HTML::style('assets/plugins/twitter-bootstrap/css/bootstrap.css') }}
 		{{ HTML::style('assets/plugins/twitter-bootstrap/css/bootswatch.min.css') }}
+		{{ HTML::style('assets/plugins/font-awesome-4.2.0/css/font-awesome.min.css') }}
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
