@@ -12,6 +12,19 @@
 			<script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
 			<script src="../bower_components/respond/dest/respond.min.js"></script>
 		<![endif]-->
+		<style type="text/css">
+		body {
+			  padding-top: 50px;
+			}
+		.page-header{
+			border-bottom: 1px solid #eeeeee;
+		    margin: 0 0 20px;
+		    padding-bottom: 9px;
+		}
+		.main{
+			padding-top: 30px;
+		}
+		</style>
 	</head>
 	<body>
 		<div class="navbar navbar-default navbar-fixed-top">
@@ -45,6 +58,5 @@
 
 		{{ HTML::script('assets/js/jquery-1.11.1.min.js') }}
 		{{ HTML::script('assets/plugins/twitter-bootstrap/js/bootstrap.min.js') }}
-		<!-- {{ HTML::script('assets/plugins/twitter-bootstrap/js/bootswatch.js') }} -->
 	</body>
 </html>

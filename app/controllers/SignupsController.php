@@ -10,7 +10,7 @@ class SignupsController extends BaseController {
 	 */
 	public function index()
 	{
-		
+		return View::make('signups.index');
 	}
 
 	/**
@@ -37,15 +37,28 @@ class SignupsController extends BaseController {
 
         if ($validation->passes())
         {
-            $account = new Account;
-			$account->full_name = Input::get('full_name');
-			$account->company = Input::get('company');
-			$account->domain = Input::get('domain');
-			$account->email = Input::get('email');
-		    $account->active = 1;
-		    $account->password = Hash::make(Input::get('password'));
-		    $account->save();
-            return Redirect::route('sign-up');
+        	DB::transaction(function(){
+        		$account = new Account;
+				$account->full_name = Input::get('full_name');
+				$account->company = Input::get('company');
+				$account->domain = Input::get('domain');
+			    $account->save();
+
+			    $user = new User;
+			    $user->account_id = $account->id;
+				$user->full_name = Input::get('full_name');
+				$user->username = Input::get('email');
+				$user->password = Hash::make(Input::get('password'));
+				$user->admin = 0;
+				$user->account_admin = 1;
+				$user->active = 1;
+				$user->email = Input::get('email');
+				$user->save();
+        	});
+           
+		   
+
+            return Redirect::route('items.index');
         }
 
         return Redirect::route('sign-up')

@@ -12,4 +12,9 @@ class Account extends \Eloquent {
     	'domain' => 'required|unique:accounts',
     	'email' => 'required|email'
   	);
+
+  	public function users()
+    {
+        return $this->hasMany('User');
+    }
 }
