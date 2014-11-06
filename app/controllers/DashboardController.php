@@ -1,6 +1,6 @@
 <?php
 
-class DashboardController extends \BaseController {
+class DashboardController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,7 +10,8 @@ class DashboardController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('dashboard.index');
+		$orgs = $this->currentUser()->account->company;
+		return View::make('dashboard.index',compact('orgs'));
 	}
 
 	/**

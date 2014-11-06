@@ -14,7 +14,7 @@
 		<div class="col-lg-4">
 		{{ Form::open(array('route' => 'department.store','class' => 'bs-component')) }}
 			<div class="form-group">
-				{{ Form::label('department_desc', 'item Department', array('class' => 'control-label')) }}
+				{{ Form::label('department_desc', 'Item Department', array('class' => 'control-label')) }}
 				{{ Form::text('department_desc','',array('class' => 'form-control', 'placeholder' => 'Garments')) }}
 			</div>
 

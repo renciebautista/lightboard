@@ -10,7 +10,7 @@ class DepartmentsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$departments = Department::all();
+		$departments = Department::getByAccount($this->currentUser()->account->id);
 		return View::make('departments.index')->with('departments',$departments);
 	}
 
@@ -22,6 +22,7 @@ class DepartmentsController extends \BaseController {
 	 */
 	public function create()
 	{
+
 		return View::make('departments.create');
 	}
 
@@ -34,12 +35,22 @@ class DepartmentsController extends \BaseController {
 	public function store()
 	{	
 		Input::merge(array_map('trim', Input::all()));
+		Input::merge(array('account_id' => $this->currentUser()->account->id));
 		$input = Input::all();
-		$validation = Validator::make($input, Department::$rules);
+
+		$rules = array(
+			'department_desc' => 'required|unique:departments,department_desc,NULL,id,account_id,'.$this->currentUser()->account->id,
+			'account_id' => 'required'
+		);
+
+		$validation = Validator::make($input, $rules);
 
 		if($validation->passes())
 		{
-			$department = Department::create(array('department_desc' => Input::get('department_desc')));
+			$department = Department::create(array(
+				'department_desc' => strtoupper(Input::get('department_desc')),
+				'account_id' => $this->currentUser()->account->id
+				));
 			return Redirect::route('department.index');
 		}
 

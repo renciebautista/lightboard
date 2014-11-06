@@ -37,7 +37,6 @@ class SessionsController extends \BaseController {
 		// get model based on username_or_email, returns null if not present
 		$user = User::where('email', $input['email'])->first();
 		 
-		 
 		if(!$user) {
 			$attempt = false;
 		} else {

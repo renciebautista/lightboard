@@ -2,6 +2,8 @@
 
 class BaseController extends Controller {
 
+	protected $currentUser;
+
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -13,6 +15,15 @@ class BaseController extends Controller {
 		{
 			$this->layout = View::make($this->layout);
 		}
+	}
+
+	protected function currentUser()
+	{
+		if (! $this->currentUser) {
+            $this->currentUser = Auth::user();
+        }
+
+        return $this->currentUser;
 	}
 
 }
