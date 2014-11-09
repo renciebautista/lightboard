@@ -34,7 +34,4 @@
 		"preferred-install": "dist"
 	},
 	"minimum-stability": "stable",
-	"require-dev": {
-	    "way/generators": "~2.0"
-	}
 }
