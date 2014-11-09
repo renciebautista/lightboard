@@ -10,8 +10,9 @@ class BranchesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$branches = Branch::all();
-		return View::make('branches.index')->with('branches', $branches);
+		$pagetitle = "Branch List";
+		$branches = Branch::getByAccount($this->currentUser()->account->id);
+		return View::make('branches.index', compact('pagetitle','branches'));
 	}
 
 	/**
@@ -22,7 +23,8 @@ class BranchesController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$pagetitle = "New Branch";
+		return View::make('branches.create',compact('pagetitle'));
 	}
 
 	/**
@@ -33,7 +35,31 @@ class BranchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		Input::merge(array_map('trim', Input::all()));
+		Input::merge(array('account_id' => $this->currentUser()->account->id));
+		$input = Input::all();
+
+		$rules = array(
+			'branch_name' => 'required|unique:branches,branch_name,NULL,id,account_id,'.$this->currentUser()->account->id,
+			'address' => 'required'
+		);
+
+		$validation = Validator::make($input, $rules);
+
+		if($validation->passes())
+		{
+			$branch = new Branch();
+			$branch->account_id = $this->currentUser()->account->id;
+			$branch->branch_name = strtoupper(Input::get('branch_name'));
+			$branch->address = Input::get('address');
+			$branch->save();
+
+			return Redirect::route('branch.index');
+		}
+		return Redirect::route('branch.create')
+			->withInput()
+			->withErrors($validation)
+			->with('message', 'There were validation errors.');
 	}
 
 	/**

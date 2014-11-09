@@ -9,4 +9,14 @@ class Department extends \Eloquent {
            ->where('account_id', $account_id)
            ->get();
 	}
+
+	// each departmemt has many category
+	public function categories() {
+		return $this->hasMany('Category');
+	}
+
+	public function account()
+	{
+		return $this->belongsTo('Account');
+	}
 }

@@ -17,4 +17,14 @@ class Account extends \Eloquent {
 	{
 		return $this->hasMany('User');
 	}
+
+	public function departments()
+	{
+		return $this->hasMany('Department');
+	}
+
+	public function items()
+	{
+		return $this->hasMany('Item');
+	}
 }

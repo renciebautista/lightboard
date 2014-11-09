@@ -25,15 +25,25 @@ Route::get('/', array('as' => 'sign-up.index', 'uses' => 'SignupsController@inde
 Route::get('signup', array('as' => 'sign-up', 'uses' => 'SignupsController@create'));
 Route::post('signup',array('as' => 'sign-up', 'uses' => 'SignupsController@store'));
 
+Route::group(array('prefix' => 'ajax'), function()
+{
+    Route::get('department/{id}', 'DepartmentCategoryController@index');
+
+});
+
 Route::group(array('before' => 'auth'), function()
 {
-	Route::resource('items', 'ItemsController');
+	Route::resource('item', 'ItemsController');
 
 	Route::resource('sales', 'SalesController');
 
-	Route::resource('branches', 'BranchesController');
+	Route::resource('branch', 'BranchesController');
 
 	Route::resource('department', 'DepartmentsController');
+
+	Route::get('department/{id}/category', array('as' => 'department-category.index', 'uses' => 'DepartmentCategoryController@index'));
+	Route::get('department/{id}/category/create', array('as' => 'department-category.create', 'uses' => 'DepartmentCategoryController@create'));
+	Route::post('department/{id}/category/create', array('as' => 'department-category.store', 'uses' => 'DepartmentCategoryController@store'));
 
 	Route::resource('category', 'CategoriesController');
 
